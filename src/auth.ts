@@ -1,7 +1,9 @@
 import { NextAuthOptions } from 'next-auth';
 import GoogleProvider from "next-auth/providers/google";
-import { FirestoreAdapter } from "@auth/firebase-adapter"
-import { adminDB } from '@/firebase/firebase-admin';
+import { SupabaseAdapter } from "@auth/supabase-adapter"
+import { Adapter } from 'next-auth/adapters';
+// import { FirestoreAdapter } from "@auth/firebase-adapter"
+// import { adminDB } from '@/firebase/firebase-admin';
 
 export const authOptions : NextAuthOptions = {
     providers: [
@@ -10,6 +12,10 @@ export const authOptions : NextAuthOptions = {
             clientSecret: process.env.GOOGLE_CLIENT_SECRET!
         })
     ],
+    adapter: SupabaseAdapter({
+        url: process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        secret: process.env.SUPABASE_SERVICE_ROLE_KEY!,
+      }) as Adapter,
     callbacks: {
         jwt: async ({user,token}) => {
             if(user) token.sub = user.id
@@ -27,5 +33,5 @@ export const authOptions : NextAuthOptions = {
     session: {
         strategy: "jwt"
     },
-    adapter: FirestoreAdapter(adminDB),
+    // adapter: FirestoreAdapter(adminDB),
 } satisfies NextAuthOptions;

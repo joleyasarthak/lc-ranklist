@@ -2,6 +2,7 @@
 import React from "react";
 import UserAvatar from "./UserAvatar";
 import Link from "next/link";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,7 +22,7 @@ type Props = {
 export default function UserButton({ session }: Props) {
   if (!session) {
     return (
-      <Link href="signin">
+      <Link href="signin" prefetch={false}>
         <Button onClick={() => signIn()}>Sign In</Button>
       </Link>
     );
@@ -35,9 +36,9 @@ export default function UserButton({ session }: Props) {
         <DropdownMenuContent>
           <DropdownMenuLabel>Hi, {session.user?.name}</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>
-            <Link href={"/profile"}>Profile</Link>
-          </DropdownMenuItem>
+          <Link href={"/profile"}>
+            <DropdownMenuItem>Profile</DropdownMenuItem>
+          </Link>
           <DropdownMenuItem onClick={() => signOut()}>
             Sign Out
           </DropdownMenuItem>

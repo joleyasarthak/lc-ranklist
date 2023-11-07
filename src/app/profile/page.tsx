@@ -6,5 +6,14 @@ type Props = {};
 
 export default function Profile({}: Props) {
   const session = useSession();
-  return <h1>Hi {session.data?.user.name}!</h1>;
+  console.log(session);
+  if (!session.data)
+    return (
+      <div className="text-3xl text-center">
+        Please Login to access this page
+      </div>
+    );
+  return (
+    <h1 className="text-center text-2xl">Hi {session.data?.user.name}!</h1>
+  );
 }
