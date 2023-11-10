@@ -26,12 +26,17 @@ export const authOptions : NextAuthOptions = {
                 if(token.sub){
                     session.user.id = token.sub;
                 }
+            } 
+            const res = await fetch(`http://localhost:3000/api/getUsernameStatus?user_id=${session.user.id}`)
+            if(res.status === 409){
+                const response = await res.json()
+                session.user.lc_username = response.data[0].lc_username;
+                session.user.org = response.data[0].org;
             }
             return session;
-        }
+        },
     },
     session: {
         strategy: "jwt"
     },
-    // adapter: FirestoreAdapter(adminDB),
 } satisfies NextAuthOptions;

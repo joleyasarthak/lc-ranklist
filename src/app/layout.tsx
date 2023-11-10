@@ -4,6 +4,8 @@ import "./globals.css";
 import { ThemeProvider, ClientProvider } from "./providers";
 import NavBar from "@/components/NavBar/NavBar";
 import Footer from "@/components/Footer/Footer";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,6 +28,7 @@ export default function RootLayout({
             <div className="my-20">{children}</div>
             <Footer />
           </ThemeProvider>
+          <ToastContainer />
         </body>
       </html>
     </ClientProvider>
