@@ -27,12 +27,12 @@ export const authOptions : NextAuthOptions = {
                     session.user.id = token.sub;
                 }
             } 
-            const res = await fetch(`${process.env.NEXTAUTH_URL}/api/getUsernameStatus?user_id=${session.user.id}`)
-            if(res.status === 409){
-                const response = await res.json()
-                session.user.lc_username = response.data[0].lc_username;
-                session.user.org = response.data[0].org;
-            }
+            // const res = await fetch(`${process.env.NEXTAUTH_URL}/api/getUsernameStatus?user_id=${session.user.id}`)
+            // if(res.status === 409){
+            //     const response = await res.json()
+            //     session.user.lc_username = response.data[0].lc_username;
+            //     session.user.org = response.data[0].org;
+            // }
             return session;
         },
     },
