@@ -25,9 +25,9 @@ export default function OrgSearch({ text }: Props) {
   return (
     <>
       {data &&
-        data.map((org: { org: string }) => {
+        data.map((org: { org: string }, index: number) => {
           // console.log(org.org);
-          return <option>{org.org}</option>;
+          return <option key={index}>{org.org}</option>;
         })}
     </>
   );

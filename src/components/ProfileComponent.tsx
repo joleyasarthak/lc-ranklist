@@ -3,6 +3,7 @@ import { useDialogStore } from "@/states/DialogStore";
 import { useSession } from "next-auth/react";
 import React from "react";
 import UsernameForm from "./UsernameForm";
+import Image from "next/image";
 
 type Props = {};
 
@@ -13,7 +14,7 @@ function Profile({}: Props) {
     <>
       <div className="bg-white p-10 rounded-lg shadow-md max-w-lg w-full dark:bg-gray-900">
         <div className="flex items-center justify-start mb-4">
-          <img
+          <Image
             src={session.data?.user.image || ""}
             alt="User Image"
             className="w-16 h-16 rounded-full mr-4"

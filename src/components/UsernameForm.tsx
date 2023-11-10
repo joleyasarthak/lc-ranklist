@@ -108,8 +108,19 @@ type Props = {};
 
 export default function CheckUsername({}: Props) {
   const { data, update } = useSession();
-  if (!data) return <></>;
   const { open, setOpen } = useDialogStore();
+  const [buttonDisabled, setButtonDisabled] = useState(true);
+  const [user, setUser] = useState({
+    user_id: data?.user.id,
+    username: data?.user.lc_username || "",
+    org: data?.user.org || "",
+  });
+  useEffect(() => {
+    if (user.username.length > 0 && user.org.length > 0)
+      setButtonDisabled(false);
+    else setButtonDisabled(true);
+  }, [user]);
+  if (!data) return <></>;
   const handleSessionUpdate = () => {
     update({ lc_username: user.username, org: user.org });
   };
@@ -139,17 +150,6 @@ export default function CheckUsername({}: Props) {
     });
     setOpen(false);
   };
-  const [buttonDisabled, setButtonDisabled] = useState(true);
-  const [user, setUser] = useState({
-    user_id: data?.user.id,
-    username: data.user.lc_username || "",
-    org: data.user.org || "",
-  });
-  useEffect(() => {
-    if (user.username.length > 0 && user.org.length > 0)
-      setButtonDisabled(false);
-    else setButtonDisabled(true);
-  }, [user]);
   console.log(open);
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -158,7 +158,7 @@ export default function CheckUsername({}: Props) {
         <DialogHeader>
           <DialogTitle>Edit profile</DialogTitle>
           <DialogDescription>
-            Make changes to your profile here. Click save when you're done.
+            Make changes to your profile here. Click save when you are done.
           </DialogDescription>
         </DialogHeader>
         <form
