@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import supabase from "@/app/supabase";
 
 export async function GET(req : NextRequest){
-    const user_id = req.nextUrl.searchParams.get("user_id");
+    const user_id = req.nextUrl.searchParams.get("user_id") || "";
     const {data,error} =  await supabase
     .from("users")
     .select("lc_username,org")

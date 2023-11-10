@@ -119,31 +119,15 @@ import Link from "next/link";
 //     </Dialog>
 //   );
 // }
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 type Props = {};
 
-export default async function CheckUsername({}: Props) {
+export default function CheckUsername({}: Props) {
   const session = useSession();
-  let usernameExists = false;
-  if (session) {
-    try {
-      const res = await fetch(
-        `http://localhost:3000/api/getUsernameStatus?user_id=${session.data?.user.id}`,
-        {
-          method: "GET",
-        }
-      );
-      if (res.status === 409) {
-        usernameExists = true;
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  }
   return (
     <>
-      {session && !usernameExists && (
+      {!session.data?.user.lc_username && (
         <Link
           className="inline-flex items-center justify-center text-lg font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary hover:bg-primary/90 h-10 w-full rounded-none bg-gradient-to-r from-[#7775D6] to-[#E935C1] text-center text-white px-5 py-2 hover:from-[#7775D6] hover:to-[#E935C1] hover:shadow-md hover:opacity-75 transition-all"
           href={"/profile"}

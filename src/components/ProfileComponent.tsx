@@ -17,6 +17,8 @@ function Profile({}: Props) {
           <Image
             src={session.data?.user.image || ""}
             alt="User Image"
+            width={64}
+            height={64}
             className="w-16 h-16 rounded-full mr-4"
           />
           <div>
@@ -26,7 +28,7 @@ function Profile({}: Props) {
             </p>
             <h2 className="text-gray-500 dark:text-gray-300">
               {session.data?.user.lc_username ||
-                "Username and Org not provided. "}
+                "Edit Profile to add username and org"}
             </h2>
             <h2 className="text-gray-500 dark:text-gray-300">
               {session.data?.user.org}
