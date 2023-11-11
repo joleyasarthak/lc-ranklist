@@ -180,7 +180,7 @@ export default function CheckUsername({}: Props) {
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="org" className="text-right">
-                Organization
+                College
               </Label>
               <Input
                 id="org"
