@@ -126,7 +126,7 @@ export default function CheckUsername({}: Props) {
   };
   const handleSubmit = async () => {
     try {
-      const res = await fetch("http://localhost:3000/api/addDetails", {
+      const res = await fetch("/api/addDetails", {
         method: "POST",
         body: JSON.stringify(user),
         headers: {
@@ -150,7 +150,6 @@ export default function CheckUsername({}: Props) {
     });
     setOpen(false);
   };
-  console.log(open);
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild></DialogTrigger>
