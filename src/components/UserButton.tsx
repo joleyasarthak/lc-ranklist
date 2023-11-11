@@ -21,11 +21,7 @@ type Props = {
 
 export default function UserButton({ session }: Props) {
   if (!session) {
-    return (
-      <Link href="signin" prefetch={false}>
-        <Button onClick={() => signIn()}>Sign In</Button>
-      </Link>
-    );
+    return <Button onClick={() => signIn()}>Sign In</Button>;
   }
   return (
     session && (

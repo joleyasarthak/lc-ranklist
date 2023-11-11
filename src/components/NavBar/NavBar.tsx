@@ -15,7 +15,7 @@ export default async function NavBar() {
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <Link href="/" className="flex items-center" prefetch={false}>
             <Logo />
-            <span className="self-center ml-4 text-2xl font-semibold whitespace-nowrap dark:text-white">
+            <span className="hidden lg:block self-center ml-4 text-2xl font-semibold whitespace-nowrap dark:text-white">
               LC Ranklist
             </span>
           </Link>
