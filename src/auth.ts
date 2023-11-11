@@ -17,22 +17,22 @@ export const authOptions : NextAuthOptions = {
         secret: process.env.SUPABASE_SERVICE_ROLE_KEY!,
       }) as Adapter,
     callbacks: {
-        jwt: async ({user,token}) => {
+        async jwt({user,token}){
             if(user) token.sub = user.id
             return token;
         },
-        session: async ({session, token}) => {
+        async session ({session, token}){
             if(session?.user){
                 if(token.sub){
                     session.user.id = token.sub;
                 }
-            } 
-            // const res = await fetch(`${process.env.NEXTAUTH_URL}/api/getUsernameStatus?user_id=${session.user.id}`)
-            // if(res.status === 409){
-            //     const response = await res.json()
-            //     session.user.lc_username = response.data[0].lc_username;
-            //     session.user.org = response.data[0].org;
-            // }
+                const res = await fetch(`https://lc-ranklist.vercel.app/api/getUsernameStatus?user_id=${session.user.id}`)
+                if(res.status === 409){
+                    const response = await res.json()
+                    session.user.lc_username = response.data[0].lc_username;
+                    session.user.org = response.data[0].org;
+                }
+            }
             return session;
         },
     },
